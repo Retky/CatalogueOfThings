@@ -1,6 +1,9 @@
 require 'securerandom'
 
 class Source
+  attr_accessor :name
+  attr_reader :items, :id
+
   def initialize(name:)
     @name = name
     @id = SecureRandom.uuid.gsub('-', '').hex
