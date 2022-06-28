@@ -12,6 +12,10 @@ class App
     @store = Store.new
   end
 
+  def main_menu
+    puts 'Welcome to the catalogue of things!'
+  end
+
   def list_books
     puts ['', 'Books:']
     store.books.each_with_index { |book, index| puts "#{index+1}) #{book.label.title} \"#{book.author.first_name} #{book.author.last_name}\", #{book.publisher}, #{book.genre.name}, from: #{book.source.name}, #{book.publish_date} " }
@@ -30,5 +34,9 @@ class App
   def add_label(title:, color:)
     label = Label.new(title: title, color: color)
     @store.labels << label
+  end
+
+  def run
+    main_menu
   end
 end
