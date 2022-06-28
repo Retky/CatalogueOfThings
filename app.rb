@@ -4,9 +4,12 @@ require './genre'
 require './label'
 require './source'
 require './store'
+require './music_utils'
 
 class App
   attr_reader :store
+
+  include MusicUtils
 
   def initialize
     @store = Store.new
@@ -18,7 +21,10 @@ class App
 
   def list_books
     puts ['', 'Books:']
-    store.books.each_with_index { |book, index| puts "#{index+1}) #{book.label.title} \"#{book.author.first_name} #{book.author.last_name}\", #{book.publisher}, #{book.genre.name}, from: #{book.source.name}, #{book.publish_date} " }
+    store.books.each_with_index do |book, index|
+      puts "#{index + 1}) #{book.label.title} \"#{book.author.first_name} #{book.author.last_name}\"," \
+           "#{book.publisher}, #{book.genre.name}, from: #{book.source.name}, #{book.publish_date} "
+    end
   end
 
   def list_labels
@@ -26,8 +32,9 @@ class App
     store.labels.each { |label| puts "#{label.title}, Color: #{label.color}" }
   end
 
-  def add_book(publisher:, cover_state:, publish_date:, author:, label:, source:, genre:)
-    book = Book.new(publisher: publisher, cover_state: cover_state, publish_date: publish_date, author: author, label: label, source: source, genre: genre)
+  def add_book(publisher:, cover_state:, publish_date:, author:, **options)
+    book = Book.new(publisher: publisher, cover_state: cover_state, publish_date: publish_date, author: author,
+                    label: options[:label], source: options[:source], genre: options[:genre])
     @store.books << book
   end
 
