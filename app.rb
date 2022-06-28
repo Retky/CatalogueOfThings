@@ -5,6 +5,7 @@ require './label'
 require './source'
 require './store'
 require './music_utils'
+require './game'
 
 class App
   attr_reader :store
@@ -41,6 +42,26 @@ class App
   def add_label(title:, color:)
     label = Label.new(title: title, color: color)
     @store.labels << label
+  end
+
+  def add_game(params = {})
+    game = Game.new(params)
+    @store.games << game
+  end
+
+  def list_games
+    puts ['', 'Games:']
+    store.games.each_with_index do |game, index|
+      puts "#{index + 1}) #{game.label.title} \"#{game.author.first_name} #{game.author.last_name}\"," \
+           "#{game.publisher}, #{game.genre.name}, from: #{game.source.name}, #{game.publish_date} "
+    end
+  end
+
+  def list_authors
+    puts ['', 'Authors:']
+    store.authors.each do |author|
+      puts "#{author.first_name} #{author.last_name}"
+    end
   end
 
   def run
