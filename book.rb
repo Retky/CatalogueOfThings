@@ -10,6 +10,8 @@ class Book < Item
     super(publish_date: publish_date, author: author, label: label, source: source, genre: genre)
   end
 
+  private
+
   def can_be_archived?
     super or @cover_state == 'bad'
   end
