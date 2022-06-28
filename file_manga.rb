@@ -1,5 +1,9 @@
 require 'json'
 
+# to write to a file
+#  FileManga.new(file_name: 'file_name.json', object<any>).write => writes to file
+#  FileManga.new(file_name: 'file_name.json').read(construct:ClassName) => returns array of instances 
+
 class FileManga
   def initialize(filename:, object: nil)
     @filename = filename
@@ -12,14 +16,18 @@ class FileManga
     end
   end
 
-  def read
-    objects = []
+  def read(construct:)
+    instances = []
     File.open(@filename, 'r') do |f|
       f.each do |line|
-        objects << JSON.parse(line, symbolize_names: true)
+        attributes = JSON.parse(line, symbolize_names: true)
+        instance = construct.new(attributes)
+        instances << instance
       end
     end
-    objects
+    instances
+  rescue StandardError
+    nil
   end
 
   private
@@ -35,7 +43,11 @@ class FileManga
   end
 end
 
-# create objects:
-# restaurants = json_data.map do |hash|
-#   Restaurant.new(hash[:restaurant], hash[:cost])
-# end
+class Person
+  attr_accessor :name, :age
+
+  def initialize(params = {})
+    @name = params[:name]
+    @age = params[:age]
+  end
+end
