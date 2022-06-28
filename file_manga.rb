@@ -35,14 +35,7 @@ class FileManga
   end
 end
 
-class Person
-  def initialize(name:, age:)
-    @name = name
-    @age = age
-  end
-end
-
-# create back objects:
+# create objects:
 # restaurants = json_data.map do |hash|
-# Restaurant.new(hash[:restaurant], hash[:cost])
+#   Restaurant.new(hash[:restaurant], hash[:cost])
 # end
