@@ -8,7 +8,7 @@ class FileManga
 
   def write
     File.open(@filename, 'a') do |f|
-      f.write(object_to_json)
+      f.write("#{object_to_json}\n")
     end
   end
 
