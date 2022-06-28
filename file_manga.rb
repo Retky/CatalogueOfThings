@@ -1,7 +1,7 @@
 require 'json'
 
 class FileManga
-  def initialize(filename:, object:)
+  def initialize(filename:, object: nil)
     @filename = filename
     @object = object
   end
@@ -11,10 +11,6 @@ class FileManga
       f.write("#{object_to_json}\n")
     end
   end
-
-  # restaurants = json_data.map do |hash|
-  # Restaurant.new(hash[:restaurant], hash[:cost])
-  # end
 
   def read
     objects = []
@@ -46,29 +42,7 @@ class Person
   end
 end
 
-person = Person.new(name: 'Henry', age: 34)
-# manga = FileManga.new(filename: 'people.json', object: person).write
-
-persons = FileManga.new(filename: 'people.json', object: person).read
-
-p persons
-
-#
-# person = Person.new(name: 'Henry', age: 33)
-#
-# instance_vars =  person.instance_variables()
-#
-# object_hash = {}
-#
-# written_object = ''
-#
-# instance_vars.each do |var|
-#   #p person.instance_variable_get var
-#   s_var = var.to_s.gsub('@', '').to_sym
-#   object_hash[s_var] = person.instance_variable_get var
+# create back objects:
+# restaurants = json_data.map do |hash|
+# Restaurant.new(hash[:restaurant], hash[:cost])
 # end
-#
-# p object_hash.to_json
-# p JSON.parse(object_hash.to_json, symbolize_names: true)
-#
-#
