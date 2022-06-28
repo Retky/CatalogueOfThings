@@ -12,6 +12,20 @@ class FileManga
     end
   end
 
+  # restaurants = json_data.map do |hash|
+  # Restaurant.new(hash[:restaurant], hash[:cost])
+  # end
+
+  def read
+    objects = []
+    File.open(@filename, 'r') do |f|
+      f.each do |line|
+        objects << JSON.parse(line, symbolize_names: true)
+      end
+    end
+    objects
+  end
+
   private
 
   def object_to_json
@@ -33,7 +47,11 @@ class Person
 end
 
 person = Person.new(name: 'Henry', age: 34)
-FileManga.new(filename: 'people.json', object: person).write
+# manga = FileManga.new(filename: 'people.json', object: person).write
+
+persons = FileManga.new(filename: 'people.json', object: person).read
+
+p persons
 
 #
 # person = Person.new(name: 'Henry', age: 33)
