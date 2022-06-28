@@ -7,7 +7,7 @@ require './store'
 require './music_utils'
 
 class App
-  attr_reader :store
+  attr_accessor :store
 
   include MusicUtils
 
