@@ -79,6 +79,19 @@ class App
     puts 'Book added!', ''
   end
 
+  def add_new_game
+    inputs = inputs_for_new_item
+    print 'multiplayer? (y/n): '
+    multiplayer = gets[0].downcase == 'y'
+    print 'last played (yyyy-mm-dd): '
+    last_played = gets.chomp
+    add_game({ author: Author.new(first_name: inputs[:author_first_name], last_name: inputs[:author_last_name]),
+               label: Label.new(title: inputs[:label_title], color: inputs[:label_color]),
+               genre: Genre.new(name: inputs[:genre_name]), source: Source.new(name: inputs[:source_name]),
+               multiplayer: multiplayer, last_played: last_played })
+    puts 'Game added!', ''
+  end
+
   def list_books
     puts ['', 'Books:']
     store.books.each_with_index do |book, index|
@@ -144,7 +157,7 @@ class App
     puts ['', 'Games:']
     store.games.each_with_index do |game, index|
       puts "#{index + 1}) #{game.label.title} \"#{game.author.first_name} #{game.author.last_name}\"," \
-           "#{game.publisher}, #{game.genre.name}, from: #{game.source.name}, #{game.publish_date} "
+           "#{game.genre.name}, from: #{game.source.name}, #{game.publish_date} "
     end
   end
 
