@@ -51,29 +51,29 @@ describe MusicAlbum do
     end
   end
 
-  # context '#can_be_archived?' do
-  #   it 'should return false if the album is not on Spotify' do
-  #     @source = 'itunes'
-  #     @album = MusicAlbum.new(publish_date: @publish_date, author: @author,
-  #                             label: @label, source: @source, genre: @genre)
-  #     expect(@album.can_be_archived?).to be(false)
-  #   end
+  context '#can_be_archived?' do
+    it 'should return false if the album is not on Spotify' do
+      @source = 'itunes'
+      @album = MusicAlbum.new(publish_date: @publish_date, author: @author,
+                              label: @label, source: @source, genre: @genre)
+      expect(@album.send(:can_be_archived?)).to be(false)
+    end
 
-  #   it 'should return false if the publish date is less than 10 years' do
-  #     @publish_date = Date.new(2021, 1, 1)
-  #     @album = MusicAlbum.new(publish_date: @publish_date, author: @author,
-  #                             label: @label, source: @source, genre: @genre)
-  #     expect(@album.can_be_archived?).to be(false)
-  #   end
+    it 'should return false if the publish date is less than 10 years' do
+      @publish_date = Date.new(2021, 1, 1)
+      @album = MusicAlbum.new(publish_date: @publish_date, author: @author,
+                              label: @label, source: @source, genre: @genre)
+      expect(@album.send(:can_be_archived?)).to be(false)
+    end
 
-  #   it 'should return true if the album is on Spotify and the publish date is greater than 10 years' do
-  #     @publish_date = Date.new(2010, 1, 1)
-  #     @source = 'itunes'
-  #     @album = MusicAlbum.new(publish_date: @publish_date, author: @author,
-  #                             label: @label, source: @source, genre: @genre)
-  #     expect(@album.can_be_archived?).to be(true)
-  #   end
-  # end
+    it 'should return true if the album is on Spotify and the publish date is greater than 10 years' do
+      @publish_date = Date.new(2010, 1, 1)
+      @source = 'spotify'
+      @album = MusicAlbum.new(publish_date: @publish_date, author: @author,
+                              label: @label, source: @source, genre: @genre)
+      expect(@album.send(:can_be_archived?)).to be(true)
+    end
+  end
 
   context '#on_spotify?' do
     it 'should return true if the album is on Spotify' do
