@@ -1,5 +1,4 @@
 require './item'
-require 'date'
 
 class Book < Item
   attr_accessor :publisher, :cover_state
