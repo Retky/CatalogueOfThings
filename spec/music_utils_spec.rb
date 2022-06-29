@@ -1,4 +1,5 @@
 require_relative '../app'
+require './music_album'
 
 describe App do
   before(:each) do

@@ -1,4 +1,8 @@
 require_relative '../music_album'
+require './author'
+require './label'
+require './source'
+require './genre'
 
 describe MusicAlbum do
   before(:each) do

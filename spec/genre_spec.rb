@@ -1,4 +1,7 @@
 require_relative '../genre'
+require './item'
+require './author'
+require './label'
 
 describe Genre do
   before(:each) do

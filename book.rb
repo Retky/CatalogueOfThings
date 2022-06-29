@@ -3,11 +3,10 @@ require './item'
 class Book < Item
   attr_accessor :publisher, :cover_state
 
-  def initialize(publisher:, cover_state:, publish_date:, author:, **options)
-    @publisher = publisher
-    @cover_state = cover_state
-    super(publish_date: publish_date, author: author, label: options[:label],
-          source: options[:source], genre: options[:genre])
+  def initialize(params)
+    @publisher = params[:publisher]
+    @cover_state = params[:cover_state]
+    super(params)
   end
 
   private

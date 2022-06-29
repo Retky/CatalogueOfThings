@@ -1,16 +1,17 @@
 require 'securerandom'
+require 'date'
 
 class Item
   attr_accessor :publish_date
   attr_reader :id, :archived, :author, :label, :source, :genre
 
-  def initialize(publish_date:, author:, label:, source:, genre:)
+  def initialize(params)
     @id = SecureRandom.uuid.gsub('-', '').hex
-    @publish_date = publish_date
-    @author = author
-    @label = label
-    @source = source
-    @genre = genre
+    @publish_date = params[:publish_date]
+    @author = params[:author]
+    @label = params[:label]
+    @source = params[:source]
+    @genre = params[:genre]
     @archived = false
   end
 

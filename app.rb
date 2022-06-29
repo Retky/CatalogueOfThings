@@ -33,9 +33,10 @@ class App
     store.labels.each { |label| puts "#{label.title}, Color: #{label.color}" }
   end
 
-  def add_book(publisher:, cover_state:, publish_date:, author:, **options)
-    book = Book.new(publisher: publisher, cover_state: cover_state, publish_date: publish_date, author: author,
-                    label: options[:label], source: options[:source], genre: options[:genre])
+  def add_book(publisher:, cover_state:, publish_date:, **options)
+    params = { publisher: publisher, cover_state: cover_state, publish_date: publish_date, author: options[:author],
+               label: options[:label], source: options[:source], genre: options[:genre] }
+    book = Book.new(params)
     @store.books << book
   end
 
