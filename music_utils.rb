@@ -12,6 +12,9 @@ module MusicUtils
       genre_name: params[:genre].name,
       on_spotify: params[:on_spotify]
     }
+    @store.authors << params[:author]
+    @store.genres << params[:genre]
+    # add_genere(params[:genre].name)
 
     persist_item(persist_params, 'music_album')
     @store.music_albums << album
@@ -23,10 +26,10 @@ module MusicUtils
   end
 
   def list_music_albums
-    puts ['', 'Music Albums:']
+    puts "\nMusic Albums:\n\n"
     @store.music_albums.each_with_index do |album, index|
-      puts "#{index + 1}) #{album.author.first_name} #{album.author.last_name} \t\"" \
-           "#{album.label.title}\" #{album.genre.name}, #{album.publish_date}"
+      puts "#{index + 1}) #{album.author.first_name} #{album.author.last_name}" \
+           "\t#{album.label.title}\t#{album.genre.name}\t#{album.publish_date}"
     end
   end
 

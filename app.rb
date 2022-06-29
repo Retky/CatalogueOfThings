@@ -1,4 +1,5 @@
 require 'json'
+require 'pry'
 require './author'
 require './book'
 require './genre'
@@ -107,6 +108,7 @@ class App
       params = music_album_params(raw_params)
       music = MusicAlbum.new(params)
       @store.music_albums << music
+      @store.genres << music.genre
     else
       puts 'Unknown item type'
     end
@@ -169,3 +171,5 @@ app = App.new
 
 app.load_items('music_album')
 p app.store.music_albums
+puts app.list_music_albums
+puts app.list_genres
