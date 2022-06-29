@@ -4,9 +4,12 @@ require './genre'
 require './label'
 require './source'
 require './store'
+require './music_utils'
 
 class App
-  attr_reader :store
+  attr_accessor :store
+
+  include MusicUtils
 
   def initialize
     @store = Store.new
