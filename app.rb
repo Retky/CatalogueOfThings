@@ -19,6 +19,7 @@ class App
     load_items('books')
     load_items('games')
     load_items('music_albums')
+    load_items('asdfasdfasdf')
   end
 
   def main_menu
@@ -151,6 +152,8 @@ class App
         recreate_item(params, type)
       end
     end
+  rescue StandardError => e
+    puts "Error loading #{type} from file: #{e.message}"
   end
 
   def recreate_item(raw_params, type)
