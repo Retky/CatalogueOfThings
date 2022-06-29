@@ -10,7 +10,12 @@ describe Book do
     @genre = Genre.new(name: 'Fantasy')
     @source = Source.new(name: 'Amazon')
     @label = Label.new(title: 'Random House', color: 'Red')
-    @book = Book.new(params = { publisher: 'Random House', cover_state: 'good', publish_date: Date.new(2017, 1, 1), author: @author, label: @label, source: @source, genre: @genre })
+    params = {
+      publisher: 'Random House', cover_state: 'good',
+      publish_date: Date.new(2017, 1, 1), author: @author,
+      label: @label, source: @source, genre: @genre
+    }
+    @book = Book.new(params)
   end
 
   it 'should have an author' do
