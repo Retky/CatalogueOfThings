@@ -17,11 +17,13 @@ class App
   def initialize
     @store = Store.new
     load_items('books')
+    load_items('games')
+    load_items('music_albums')
   end
 
   def main_menu
     @main_menu = [
-      ' 1) List books', ' 2) List muscic albums', ' 3) List games',
+      ' 1) List books', ' 2) List music albums', ' 3) List games',
       ' 4) List genres', ' 5) List labels', ' 6) List authors',
       ' 7) List sources', ' 8) Add book', ' 9) Add music album',
       '10) Add game', '11) Exit'
@@ -35,7 +37,7 @@ class App
   def main_selection
     methods = { 1 => :list_books, 2 => :list_music_albums, 3 => :list_games, 4 => :list_genres, 5 => :list_labels,
                 6 => :list_authors, 7 => :list_sources, 8 => :add_book,
-                9 => :add_music_album, 10 => :add_game, 11 => :exit }
+                9 => :add_music_album, 10 => :add_game, 11 => :abort }
     selection = gets.chomp.to_i
     if methods[selection]
       send(methods[selection])
@@ -56,6 +58,16 @@ class App
   def list_labels
     puts ['', 'Labels:']
     store.labels.each { |label| puts "#{label.title}, Color: #{label.color}" }
+  end
+
+  def list_genres
+    puts ['', 'Genres:']
+    store.genres.each { |genre| puts genre.name }
+  end
+
+  def list_sources
+    puts ['', 'Sources:']
+    store.sources.each { |source| puts source.name }
   end
 
   def add_book(params = {})
