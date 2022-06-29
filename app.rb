@@ -1,3 +1,4 @@
+require 'pry'
 require 'json'
 require './author'
 require './book'
@@ -93,6 +94,21 @@ class App
     end
   end
 
+  def save_instances_to_store(objects)
+    objects.each do |object|
+      case object.class.to_s
+      when 'Label'
+        @store.labels << object
+      when 'Author'
+        @store.authors << object
+      when 'Genre'
+        @store.genres << object
+      when 'Source'
+        @store.sources << object
+      end
+    end
+  end
+
   def load_items(type)
     File.open("#{type}.json", 'r') do |file|
       file.each_line do |line|
@@ -104,9 +120,10 @@ class App
 
   def recreate_item(raw_params, type)
     case type
-    when 'book'
+    when 'books'
       params = book_params(raw_params)
       book = Book.new(params)
+      save_instances_to_store([book.label, book.author, book.genre, book.source])
       @store.books << book
     when 'games'
       params = game_params(raw_params)
@@ -172,10 +189,14 @@ end
 # p app.store.games
 
 # require 'date'
-# app = App.new
+app = App.new
 # #add The lord of the rings
-# app.add_book({ publish_date: Date.new(1954, 1, 1), publisher: 'Allen & Unwin', cover_state: 'good', author: Author.new(first_name: 'J.R.R.', last_name: 'Tolkien'), label: Label.new(title: 'Lord of the Rings', color: 'yellow'), source: Source.new(name: 'Amazon'), genre: Genre.new(name: 'Fantasy') })
+# app.add_book({ publish_date: Date.new(1954, 1, 1), publisher: 'Allen & Unwin', cover_state: 'good',
+#                author: Author.new(first_name: 'J.R.R.', last_name: 'Tolkien'), label: Label.new(title: 'Lord of the Rings', color: 'yellow'), source: Source.new(name: 'Amazon'), genre: Genre.new(name: 'Fantasy') })
 # # add Harry Potter and the Philosopher's Stone
-# app.add_book({ publish_date: Date.new(1997, 1, 1), publisher: 'Bloomsbury', cover_state: 'good', author: Author.new(first_name: 'J.K.', last_name: 'Rowling'), label: Label.new(title: 'Harry Potter and the Philosopher\'s Stone', color: 'blue'), source: Source.new(name: 'Amazon'), genre: Genre.new(name: 'Fantasy') })
+# app.add_book({ publish_date: Date.new(1997, 1, 1), publisher: 'Bloomsbury', cover_state: 'good',
+#                author: Author.new(first_name: 'J.K.', last_name: 'Rowling'), label: Label.new(title: 'Harry Potter and the Philosopher\'s Stone', color: 'blue'), source: Source.new(name: 'Amazon'), genre: Genre.new(name: 'Fantasy') })
 # # add Robin Hood
-# app.add_book({ publish_date: Date.new(1850, 1, 1), publisher: 'William Morrow', cover_state: 'good', author: Author.new(first_name: 'Mark', last_name: 'Twain'), label: Label.new(title: 'Robin Hood', color: 'red'), source: Source.new(name: 'Amazon'), genre: Genre.new(name: 'Fantasy') })
+# app.add_book({ publish_date: Date.new(1850, 1, 1), publisher: 'William Morrow', cover_state: 'good',
+#                author: Author.new(first_name: 'Mark', last_name: 'Twain'), label: Label.new(title: 'Robin Hood', color: 'red'), source: Source.new(name: 'Amazon'), genre: Genre.new(name: 'Fantasy') })
+app.load_items('books')
