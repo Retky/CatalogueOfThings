@@ -1,3 +1,4 @@
+require 'date'
 require_relative 'item'
 
 class Game < Item
@@ -8,7 +9,7 @@ class Game < Item
           source: params[:source], genre: params[:genre])
 
     @multiplayer = params[:multiplayer]
-    @last_played_at = params[:last_played_at]
+    @last_played_at = Date.new(params[:last_played_at].to_i)
   end
 
   private
