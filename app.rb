@@ -37,8 +37,8 @@ class App
 
   def main_selection
     methods = { 1 => :list_books, 2 => :list_music_albums, 3 => :list_games, 4 => :list_genres, 5 => :list_labels,
-                6 => :list_authors, 7 => :list_sources, 8 => :add_book,
-                9 => :add_music_album, 10 => :add_game, 11 => :abort }
+                6 => :list_authors, 7 => :list_sources, 8 => :add_new_book,
+                9 => :add_new_music_album, 10 => :add_new_game, 11 => :abort }
     selection = gets.chomp.to_i
     if methods[selection]
       send(methods[selection])
@@ -48,11 +48,42 @@ class App
     main_menu
   end
 
+  def inputs_for_new_item
+    print 'Title: '
+    label_title = gets.chomp
+    print 'Author First Name: '
+    author_first_name = gets.chomp
+    print 'Author Last Name: '
+    author_last_name = gets.chomp
+    print 'Genre: '
+    genre_name = gets.chomp
+    print 'Source: '
+    source_name = gets.chomp
+    print 'publish date (yyyy-mm-dd): '
+    publish_date = gets.chomp
+    { label_title: label_title, author_first_name: author_first_name,
+      author_last_name: author_last_name, genre_name: genre_name, source_name: source_name,
+      publish_date: publish_date, label_color: 'Bugs Bunny' }
+  end
+
+  def add_new_book
+    inputs = inputs_for_new_item
+    print 'publisher: '
+    publisher = gets.chomp
+    print 'Cover State (Good/Bad): '
+    cover_state = gets.chomp
+    add_book({ publisher: publisher, cover_state: cover_state, publish_date: inputs[:publish_date],
+               author: Author.new(first_name: inputs[:author_first_name], last_name: inputs[:author_last_name]),
+               label: Label.new(title: inputs[:label_title], color: inputs[:label_color]),
+               genre: Genre.new(name: inputs[:genre_name]), source: Source.new(name: inputs[:source_name]) })
+    puts 'Book added!', ''
+  end
+
   def list_books
     puts ['', 'Books:']
     store.books.each_with_index do |book, index|
       puts "#{index + 1}) #{book.label.title} \"#{book.author.first_name} #{book.author.last_name}\"," \
-           "#{book.publisher}, #{book.genre.name}, from: #{book.source.name}, #{book.publish_date} "
+           " #{book.publisher}, #{book.genre.name}, from: #{book.source.name}, #{book.publish_date} "
     end
   end
 
