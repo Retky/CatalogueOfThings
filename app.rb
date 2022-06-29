@@ -141,7 +141,8 @@ class App
       label: Label.new(title: raw_params['label_title'],
                        color: raw_params['label_color']),
       source: Source.new(name: raw_params['source_name']),
-      genre: Genre.new(name: raw_params['genre_name']) }
+      genre: Genre.new(name: raw_params['genre_name']),
+      on_spotify: raw_params['on_spotify'] }
   end
 
   def music_album_params(raw_params)

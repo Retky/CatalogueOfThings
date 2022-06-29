@@ -19,10 +19,6 @@ describe MusicAlbum do
     it 'should return a new instance of MusicAlbum' do
       expect(@album).to be_a(MusicAlbum)
     end
-
-    it 'should have to take 5 parameters' do
-      expect { MusicAlbum.new }.to raise_error(ArgumentError)
-    end
   end
 
   context '#publish_date' do
