@@ -16,6 +16,7 @@ class App
 
   def initialize
     @store = Store.new
+    load_items('books')
   end
 
   def main_menu
@@ -28,6 +29,20 @@ class App
     puts '', 'Welcome to the catalogue of things!'
     puts 'What would you like to do? (Select a number)'
     puts @main_menu
+    main_selection
+  end
+
+  def main_selection
+    methods = { 1 => :list_books, 2 => :list_music_albums, 3 => :list_games, 4 => :list_genres, 5 => :list_labels,
+                6 => :list_authors, 7 => :list_sources, 8 => :add_book,
+                9 => :add_music_album, 10 => :add_game, 11 => :exit }
+    selection = gets.chomp.to_i
+    if methods[selection]
+      send(methods[selection])
+    else
+      puts 'Invalid selection'
+    end
+    main_menu
   end
 
   def list_books
