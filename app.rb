@@ -34,10 +34,20 @@ class App
     store.labels.each { |label| puts "#{label.title}, Color: #{label.color}" }
   end
 
-  def add_book(publisher:, cover_state:, publish_date:, **options)
-    params = { publisher: publisher, cover_state: cover_state, publish_date: publish_date, author: options[:author],
-               label: options[:label], source: options[:source], genre: options[:genre] }
+  def add_book(params = {})
     book = Book.new(params)
+    persist_params = {
+      publisher: params[:publisher],
+      cover_state: params[:cover_state],
+      publish_date: params[:publish_date],
+      author_first_name: params[:author].first_name,
+      author_last_name: params[:author].last_name,
+      label_title: params[:label].title,
+      label_color: params[:label].color,
+      source_name: params[:source].name,
+      genre_name: params[:genre].name
+    }
+    persist_item(persist_params, 'books')
     @store.books << book
   end
 
@@ -159,3 +169,12 @@ end
 #                genre: Genre.new(name: 'Action'), multiplayer: true, last_played_at: '2018-01-01' })
 # app.load_items('games')
 # p app.store.games
+
+# require 'date'
+# app = App.new
+# #add The lord of the rings
+# app.add_book({ publish_date: Date.new(1954, 1, 1), publisher: 'Allen & Unwin', cover_state: 'good', author: Author.new(first_name: 'J.R.R.', last_name: 'Tolkien'), label: Label.new(title: 'Lord of the Rings', color: 'yellow'), source: Source.new(name: 'Amazon'), genre: Genre.new(name: 'Fantasy') })
+# # add Harry Potter and the Philosopher's Stone
+# app.add_book({ publish_date: Date.new(1997, 1, 1), publisher: 'Bloomsbury', cover_state: 'good', author: Author.new(first_name: 'J.K.', last_name: 'Rowling'), label: Label.new(title: 'Harry Potter and the Philosopher\'s Stone', color: 'blue'), source: Source.new(name: 'Amazon'), genre: Genre.new(name: 'Fantasy') })
+# # add Robin Hood
+# app.add_book({ publish_date: Date.new(1850, 1, 1), publisher: 'William Morrow', cover_state: 'good', author: Author.new(first_name: 'Mark', last_name: 'Twain'), label: Label.new(title: 'Robin Hood', color: 'red'), source: Source.new(name: 'Amazon'), genre: Genre.new(name: 'Fantasy') })
