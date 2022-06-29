@@ -8,7 +8,7 @@ describe Game do
   before(:each) do
     params = {
       multiplayer: true,
-      last_played_at: Date.new(2018, 1, 1),
+      last_played_at: '2018, 1, 1',
       genre: Genre.new(name: 'Action'),
       author: Author.new(first_name: 'John', last_name: 'Smith'),
       label: Label.new(title: 'Epic Games', color: 'red'),
