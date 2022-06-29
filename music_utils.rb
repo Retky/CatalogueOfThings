@@ -1,6 +1,7 @@
 module MusicUtils
   def add_albums(publish_date:, author:, label:, source:, genre:)
     album = MusicAlbum.new(publish_date: publish_date, author: author, label: label, source: source, genre: genre)
+    album.on_spotify?
     @store.music_albums << album
   end
 
