@@ -18,7 +18,7 @@ class App
 
   def list_books
     puts ['', 'Books:']
-    store.books.each_with_index { |book, index| puts "#{index+1}) #{book.label.title} \"#{book.author.first_name} #{book.author.last_name}\", #{book.publisher}, #{book.genre.name}, from: #{book.source.name}, #{book.publish_date} " }
+    store.books.each_with_index { |book, index| puts "#{index + 1}) #{book.label.title} \"#{book.author.first_name} #{book.author.last_name}\", #{book.publisher}, #{book.genre.name}, from: #{book.source.name}, #{book.publish_date} " }
   end
 
   def list_labels
@@ -27,7 +27,7 @@ class App
   end
 
   def add_book(publisher:, cover_state:, publish_date:, author:, label:, source:, genre:)
-    book = Book.new(publisher: publisher, cover_state: cover_state, publish_date: publish_date, author: author, label: label, source: source, genre: genre)
+    book = Book.new(params = { publisher: publisher, cover_state: cover_state, publish_date: publish_date, author: author, label: label, source: source, genre: genre })
     @store.books << book
   end
 
@@ -40,3 +40,12 @@ class App
     main_menu
   end
 end
+
+app = App.new
+label = Label.new(title: 'Random House', color: 'Red')
+author = Author.new(first_name: 'John', last_name: 'Doe')
+genre = Genre.new(name: 'Fantasy')
+source = Source.new(name: 'Amazon')
+publish_date = Date.new(2017, 1, 1)
+app.add_book(publisher: 'Random House', cover_state: 'good', publish_date: publish_date, author: author, label: label, source: source, genre: genre)
+app.list_books
