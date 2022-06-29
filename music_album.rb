@@ -4,7 +4,7 @@ class MusicAlbum < Item
   def initialize(params = {})
     super(publish_date: params[:publish_date], author: params[:author],
           label: params[:label], source: params[:source], genre: params[:genre])
-    @on_spotify = true
+    @on_spotify = params[:on_spotify]
   end
 
   def on_spotify?

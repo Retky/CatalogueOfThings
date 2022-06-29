@@ -1,7 +1,19 @@
 module MusicUtils
-  def add_albums(publish_date:, author:, label:, source:, genre:)
-    album = MusicAlbum.new(publish_date: publish_date, author: author, label: label, source: source, genre: genre)
+  def add_music_album(params = {})
+    album = MusicAlbum.new(params)
     album.on_spotify?
+    persist_params = {
+      publish_date: params[:publish_date],
+      author_first_name: params[:author].first_name,
+      author_last_name: params[:author].last_name,
+      label_title: params[:label].title,
+      label_color: params[:label].color,
+      source_name: params[:source].name,
+      genre_name: params[:genre].name,
+      on_spotify: params[:on_spotify]
+    }
+
+    persist_item(persist_params, 'music_album')
     @store.music_albums << album
   end
 

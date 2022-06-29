@@ -142,7 +142,8 @@ class App
       label: Label.new(title: raw_params['label_title'],
                        color: raw_params['label_color']),
       source: Source.new(name: raw_params['source_name']),
-      genre: Genre.new(name: raw_params['genre_name']) }
+      genre: Genre.new(name: raw_params['genre_name']),
+      on_spotify: raw_params['on_spotify'] }
   end
 
   def run
@@ -160,3 +161,11 @@ end
 #                genre: Genre.new(name: 'Action'), multiplayer: true, last_played_at: '2018-01-01' })
 # app.load_items('games')
 # p app.store.games
+
+music_album = MusicAlbum.new({ publish_date: '2018-01-01', author: Author.new(first_name: 'John', last_name: 'Doe'), label: Label.new(title: 'Game', color: 'red'), source: Source.new(name: 'Steam'), genre: Genre.new(name: 'Action'), on_spotify: true })
+
+app = App.new
+# app.add_music_album({ publish_date: '2018-01-01', author: Author.new(first_name: 'John', last_name: 'Doe'), label: Label.new(title: 'Game', color: 'red'), source: Source.new(name: 'Steam'), genre: Genre.new(name: 'Action'), on_spotify: true })
+
+app.load_items('music_album')
+p app.store.music_albums
