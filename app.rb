@@ -19,7 +19,15 @@ class App
   end
 
   def main_menu
-    puts 'Welcome to the catalogue of things!'
+    @main_menu = [
+      ' 1) List books', ' 2) List muscic albums', ' 3) List games',
+      ' 4) List genres', ' 5) List labels', ' 6) List authors',
+      ' 7) List sources', ' 8) Add book', ' 9) Add music album',
+      '10) Add game', '11) Exit'
+    ]
+    puts '', 'Welcome to the catalogue of things!'
+    puts 'What would you like to do? (Select a number)'
+    puts @main_menu
   end
 
   def list_books
