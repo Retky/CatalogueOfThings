@@ -6,6 +6,7 @@ require './genre'
 require './label'
 require './source'
 require './store'
+require './music_album'
 require './music_utils'
 require './game'
 

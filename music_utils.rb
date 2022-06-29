@@ -25,6 +25,17 @@ module MusicUtils
     @store.genres << genre
   end
 
+  def add_new_music_album
+    inputs = inputs_for_new_item
+    add_music_album({ publish_date: inputs[:publish_date],
+                      author: Author.new(first_name: inputs[:author_first_name],
+                                         last_name: inputs[:author_last_name]),
+                      label: Label.new(title: inputs[:label_title], color: inputs[:label_color]),
+                      genre: Genre.new(name: inputs[:genre_name]), source: Source.new(name: inputs[:source_name]),
+                      on_spotify: inputs[:on_spotify] })
+    puts 'New album added!'
+  end
+
   def list_music_albums
     puts "\nMusic Albums:\n\n"
     @store.music_albums.each_with_index do |album, index|
