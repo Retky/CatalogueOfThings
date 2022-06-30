@@ -20,7 +20,6 @@ class App
     load_items('books')
     load_items('games')
     load_items('music_albums')
-    load_items('asdfasdfasdf')
   end
 
   def main_menu
@@ -217,7 +216,7 @@ class App
       game = Game.new(params)
       save_instances_to_store([game.label, game.author, game.genre, game.source])
       @store.games << game
-    when 'music_album'
+    when 'music_albums'
       params = music_album_params(raw_params)
       music = MusicAlbum.new(params)
       save_instances_to_store([music.label, music.author, music.genre, music.source])

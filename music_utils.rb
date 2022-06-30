@@ -16,7 +16,7 @@ module MusicUtils
     # @store.genres << params[:genre]
     # add_genere(params[:genre].name)
 
-    persist_item(persist_params, 'music_album')
+    persist_item(persist_params, 'music_albums')
     save_instances_to_store([album.label, album.author, album.genre, album.source])
     @store.music_albums << album
   end
