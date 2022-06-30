@@ -277,7 +277,7 @@ end
 # p app.store.games
 
 # require 'date'
-app = App.new
+# app = App.new
 # #add The lord of the rings
 # app.add_book({ publish_date: Date.new(1954, 1, 1), publisher: 'Allen & Unwin', cover_state: 'good',
 #                author: Author.new(first_name: 'J.R.R.', last_name: 'Tolkien'), label: Label.new(title: 'Lord of the Rings', color: 'yellow'), source: Source.new(name: 'Amazon'), genre: Genre.new(name: 'Fantasy') })
@@ -287,4 +287,4 @@ app = App.new
 # # add Robin Hood
 # app.add_book({ publish_date: Date.new(1850, 1, 1), publisher: 'William Morrow', cover_state: 'good',
 #                author: Author.new(first_name: 'Mark', last_name: 'Twain'), label: Label.new(title: 'Robin Hood', color: 'red'), source: Source.new(name: 'Amazon'), genre: Genre.new(name: 'Fantasy') })
-app.load_items('books')
+# app.load_items('books')
