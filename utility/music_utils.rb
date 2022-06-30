@@ -33,11 +33,18 @@ module MusicUtils
   end
 
   def list_music_albums
-    puts "\nMusic Albums:\n\n"
-    @store.music_albums.each_with_index do |album, index|
-      puts "#{index + 1}) #{album.author.first_name} #{album.author.last_name}" \
-           "\t#{album.label.title}\t#{album.genre.name}\t#{album.source.name}\t#{album.publish_date}"
+    music_album = Struct.new(:No, :title, :author, :genere, :source, :on_spotify)
+    music_albums = []
+    14.times { print '=' }
+    puts "\nMusic Albums:"
+    14.times { print '=' }
+    puts "\n\n"
+    store.music_albums.each.with_index(1) do |m, i|
+      music_albums << music_album.new(i, m.label.title,
+                                      "#{m.author.first_name} #{m.author.last_name}",
+                                      m.genre.name, m.source.name, m.on_spotify?)
     end
+    tp music_albums
   end
 
   def music_album_params(raw_params)

@@ -29,11 +29,18 @@ module GameUtils
   end
 
   def list_games
-    puts ['', 'Games:']
-    store.games.each_with_index do |game, index|
-      puts "#{index + 1}) #{game.label.title} \"#{game.author.first_name} #{game.author.last_name}\"," \
-           "#{game.genre.name}, from: #{game.source.name}, #{game.publish_date} "
+    game = Struct.new(:No, :title, :author, :genere, :source, :multiplayer, :last_played)
+    games = []
+    7.times { print '=' }
+    puts "\nBooks:"
+    7.times { print '=' }
+    puts "\n\n"
+    store.games.each.with_index(1) do |g, i|
+      games << game.new(i, g.label.title,
+                        "#{g.author.first_name} #{g.author.last_name}",
+                        g.genre.name, g.source.name, g.multiplayer, g.last_played_at)
     end
+    tp games
   end
 
   def game_params(raw_params)

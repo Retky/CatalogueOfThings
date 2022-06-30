@@ -1,4 +1,5 @@
 require 'json'
+require 'table_print'
 require './author'
 require './book'
 require './genre'
@@ -34,9 +35,13 @@ class App
       ' 7) List sources', ' 8) Add book', ' 9) Add music album',
       '10) Add game', '11) Exit'
     ]
-    puts '', 'Welcome to the catalogue of things!'
-    puts 'What would you like to do? (Select a number)'
+    puts
+    46.times { print '=' }
+    puts "\n> What would you like to do? (Select a number)"
+    46.times { print '-' }
+    puts "\n\n"
     puts @main_menu
+    print "\n[Menu] > "
     main_selection
   end
 
@@ -45,8 +50,12 @@ class App
                 6 => :list_authors, 7 => :list_sources, 8 => :add_new_book,
                 9 => :add_new_music_album, 10 => :add_new_game, 11 => :abort }
     selection = gets.chomp.to_i
+    system('clear')
     if methods[selection]
       send(methods[selection])
+      print "\n> [Press press any key to exit]: "
+      gets.chomp
+      system('clear')
     else
       puts 'Invalid selection, please select a number from the menu.'
     end
@@ -72,28 +81,51 @@ class App
   end
 
   def list_genres
-    puts ['', 'Genres:']
-    store.genres.each { |genre| puts genre.name }
+    genre = Struct.new(:No, :name)
+    genres = []
+    7.times { print '=' }
+    puts "\nGenres:"
+    7.times { print '=' }
+    puts "\n\n"
+    store.genres.each.with_index(1) { |g, i| genres << genre.new(i, g.name) }
+    tp genres
   end
 
   def list_labels
-    puts ['', 'Labels:']
-    store.labels.each { |label| puts "#{label.title}, Color: #{label.color}" }
+    label = Struct.new(:No, :name, :color)
+    labels = []
+    7.times { print '=' }
+    puts "\nLabels:"
+    7.times { print '=' }
+    puts "\n\n"
+    store.labels.each.with_index(1) { |l, i| labels << label.new(i, l.title, l.color) }
+    tp labels
   end
 
   def list_sources
-    puts ['', 'Sources:']
-    @store.sources.each { |source| puts source.name }
+    source = Struct.new(:No, :name)
+    sources = []
+    7.times { print '=' }
+    puts "\nSources:"
+    7.times { print '=' }
+    puts "\n\n"
+    store.sources.each.with_index(1) { |s, i| sources << source.new(i, s.name) }
+    tp sources
   end
 
   def list_authors
-    puts ['', 'Authors:']
-    store.authors.each do |author|
-      puts "#{author.first_name} #{author.last_name}"
-    end
+    author = Struct.new(:No, :first_name, :last_name)
+    authors = []
+    7.times { print '=' }
+    puts "\nAuthors:"
+    7.times { print '=' }
+    puts "\n\n"
+    store.authors.each.with_index(1) { |a, i| authors << author.new(i, a.first_name, a.last_name) }
+    tp authors
   end
 
   def run
+    puts "\n    Welcome to the catalogue of things!"
     main_menu
   end
 end

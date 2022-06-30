@@ -30,11 +30,18 @@ module BookUtils
   end
 
   def list_books
-    puts ['', 'Books:']
-    store.books.each_with_index do |book, index|
-      puts "#{index + 1}) #{book.label.title} \"#{book.author.first_name} #{book.author.last_name}\"," \
-           " #{book.publisher}, #{book.genre.name}, from: #{book.source.name}, #{book.publish_date} "
+    book = Struct.new(:No, :title, :author, :genere, :source, :publisher, :cover_state, :publish_date)
+    books = []
+    7.times { print '=' }
+    puts "\nBooks:"
+    7.times { print '=' }
+    puts "\n\n"
+    store.books.each.with_index(1) do |b, i|
+      books << book.new(i, b.label.title,
+                        "#{b.author.first_name} #{b.author.last_name}",
+                        b.genre.name, b.source.name, b.publisher, b.cover_state, b.publish_date)
     end
+    tp books
   end
 
   def book_params(raw_params)
