@@ -87,7 +87,8 @@ class App
     puts "\nGenres:"
     7.times { print '=' }
     puts "\n\n"
-    store.genres.each.with_index(1) { |g, i| genres << genre.new(i, g.name) }
+    genre_name = store.genres.map(&:name).uniq!
+    genre_name.each.with_index(1) { |name, i| genres << genre.new(i, name) }
     tp genres
   end
 
@@ -109,7 +110,8 @@ class App
     puts "\nSources:"
     7.times { print '=' }
     puts "\n\n"
-    store.sources.each.with_index(1) { |s, i| sources << source.new(i, s.name) }
+    source_name = store.sources.map(&:name).uniq!
+    source_name.each.with_index(1) { |name, i| sources << source.new(i, name) }
     tp sources
   end
 

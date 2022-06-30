@@ -13,6 +13,7 @@ module BookUtils
       genre_name: params[:genre].name
     }
     persist_item(persist_params, 'books')
+    save_instances_to_store([book.label, book.author, book.genre, book.source])
     @store.books << book
   end
 
