@@ -26,6 +26,11 @@ If you haven't yet, you should first [set up Git.](https://docs.github.com/en/ge
   - In the top-right corner of the page, click Fork
   - Work in the forked repository
 
+- In your local path, where you have your repo cloned:
+  - Run the command `bundle install`
+  - After the dependencies are installed proceed:
+  - Start the program with ruby main.rb
+
 ## Authors
 
 👤 **Teshome Kurabachew**
