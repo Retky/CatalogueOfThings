@@ -108,12 +108,14 @@ class App
 
   def list_genres
     puts ['', 'Genres:']
-    store.genres.each { |genre| puts genre.name }
+    genre_names = store.genres.map.each(&:name)
+    genre_names.uniq.each { |genre| puts genre }
   end
 
   def list_sources
     puts ['', 'Sources:']
-    store.sources.each { |source| puts source.name }
+    source_names = store.sources.map.each(&:name)
+    source_names.uniq.each { |source| puts source }
   end
 
   def add_book(params = {})
@@ -218,7 +220,7 @@ class App
     when 'music_album'
       params = music_album_params(raw_params)
       music = MusicAlbum.new(params)
-      save_instances_to_store([game.label, game.author, game.genre, game.source])
+      save_instances_to_store([music.label, music.author, music.genre, music.source])
       @store.music_albums << music
     else
       puts 'Unknown item type'
