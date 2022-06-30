@@ -44,7 +44,7 @@ class App
     if methods[selection]
       send(methods[selection])
     else
-      puts 'Invalid selection'
+      puts 'Invalid selection, please select a number from the menu.'
     end
     main_menu
   end
