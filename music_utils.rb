@@ -12,11 +12,12 @@ module MusicUtils
       genre_name: params[:genre].name,
       on_spotify: params[:on_spotify]
     }
-    @store.authors << params[:author]
-    @store.genres << params[:genre]
+    # @store.authors << params[:author]
+    # @store.genres << params[:genre]
     # add_genere(params[:genre].name)
 
     persist_item(persist_params, 'music_album')
+    save_instances_to_store([music.label, music.author, music.genre, music.source])
     @store.music_albums << album
   end
 

@@ -130,6 +130,7 @@ class App
       genre_name: params[:genre].name
     }
     persist_item(persist_params, 'books')
+    save_instances_to_store([book.label, book.author, book.genre, book.source])
     @store.books << book
   end
 
@@ -151,6 +152,7 @@ class App
       multiplayer: true, last_played_at: '2018-01-01'
     }
     persist_item(persist_params, 'games')
+    save_instances_to_store([game.label, game.author, game.genre, game.source])
     @store.games << game
   end
 
