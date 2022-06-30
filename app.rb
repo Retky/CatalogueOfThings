@@ -211,10 +211,12 @@ class App
     when 'games'
       params = game_params(raw_params)
       game = Game.new(params)
+      save_instances_to_store([game.label, game.author, game.genre, game.source])
       @store.games << game
     when 'music_album'
       params = music_album_params(raw_params)
       music = MusicAlbum.new(params)
+      save_instances_to_store([game.label, game.author, game.genre, game.source])
       @store.music_albums << music
     else
       puts 'Unknown item type'
