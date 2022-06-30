@@ -1,5 +1,4 @@
 require_relative '../app'
-require './music_album'
 
 describe App do
   before(:each) do
@@ -12,33 +11,15 @@ describe App do
     end
   end
 
-  context '#add_albums' do
+  context '#add_music_album' do
     it 'should add an album to the albums array' do
-      add_albums = @app.add_albums(publish_date: Date.new(2018, 1, 1),
-                                   author: Author.new(first_name: 'John', last_name: 'Smith'),
-                                   label: Label.new(title: 'Warner Bros.', color: 'red'),
-                                   source: 'spotify', genre: Genre.new(name: 'Rock'))
+      add_music_album = @app.add_music_album(publish_date: Date.new(2018, 1, 1),
+                                             author: Author.new(first_name: 'John', last_name: 'Smith'),
+                                             label: Label.new(title: 'Warner Bros.', color: 'red'),
+                                             source: Source.new(name: 'spotify'),
+                                             genre: Genre.new(name: 'Rock'), on_spotify: true)
 
-      expect(@app.store.music_albums).to include(add_albums[0])
-    end
-  end
-
-  context '#add_genere' do
-    it 'should add a genre to the genres array' do
-      add_genere = @app.add_genere(name: 'Rock')
-      expect(@app.store.genres).to include(add_genere[0])
-    end
-  end
-
-  context '#list_music_albums' do
-    it 'should return a string' do
-      expect(@app.list_music_albums).to be_a(Array)
-    end
-  end
-
-  context '#list_genres' do
-    it 'should return a string' do
-      expect(@app.list_genres).to be_a(Array)
+      expect(@app.store.music_albums).to include(add_music_album[0])
     end
   end
 end

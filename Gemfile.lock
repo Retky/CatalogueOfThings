@@ -1,0 +1,13 @@
+GEM
+  remote: https://rubygems.org/
+  specs:
+    table_print (1.5.7)
+
+PLATFORMS
+  arm64-darwin-21
+
+DEPENDENCIES
+  table_print (~> 1.5.7)
+
+BUNDLED WITH
+   2.3.15

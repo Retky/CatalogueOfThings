@@ -11,8 +11,9 @@ describe MusicAlbum do
     @label = Label.new(title: 'Warner Bros.', color: 'red')
     @source = 'spotify'
     @genre = Genre.new(name: 'Rock')
+    @on_spotify = true
     @album = MusicAlbum.new(publish_date: @publish_date, author: @author,
-                            label: @label, source: @source, genre: @genre)
+                            label: @label, source: @source, genre: @genre, on_spotify: @on_spotify)
   end
 
   context 'when initialized' do
@@ -55,14 +56,14 @@ describe MusicAlbum do
     it 'should return false if the album is not on Spotify' do
       @source = 'itunes'
       @album = MusicAlbum.new(publish_date: @publish_date, author: @author,
-                              label: @label, source: @source, genre: @genre)
+                              label: @label, source: @source, genre: @genre, on_spotify: @on_spotify)
       expect(@album.send(:can_be_archived?)).to be(false)
     end
 
     it 'should return false if the publish date is less than 10 years' do
       @publish_date = Date.new(2021, 1, 1)
       @album = MusicAlbum.new(publish_date: @publish_date, author: @author,
-                              label: @label, source: @source, genre: @genre)
+                              label: @label, source: @source, genre: @genre, on_spotify: @on_spotify)
       expect(@album.send(:can_be_archived?)).to be(false)
     end
 
@@ -70,7 +71,7 @@ describe MusicAlbum do
       @publish_date = Date.new(2010, 1, 1)
       @source = 'spotify'
       @album = MusicAlbum.new(publish_date: @publish_date, author: @author,
-                              label: @label, source: @source, genre: @genre)
+                              label: @label, source: @source, genre: @genre, on_spotify: @on_spotify)
       expect(@album.send(:can_be_archived?)).to be(true)
     end
   end
@@ -79,14 +80,14 @@ describe MusicAlbum do
     it 'should return true if the album is on Spotify' do
       @source = 'spotify'
       @album = MusicAlbum.new(publish_date: @publish_date, author: @author,
-                              label: @label, source: @source, genre: @genre)
+                              label: @label, source: @source, genre: @genre, on_spotify: @on_spotify)
       expect(@album.on_spotify?).to be(true)
     end
 
     it 'should return false if the album is not on Spotify' do
       @source = 'itunes'
       @album = MusicAlbum.new(publish_date: @publish_date, author: @author,
-                              label: @label, source: @source, genre: @genre)
+                              label: @label, source: @source, genre: @genre, on_spotify: @on_spotify)
       expect(@album.on_spotify?).to be(false)
     end
   end
